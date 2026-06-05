@@ -15,6 +15,7 @@
 - **Generate migrations:** `npm run db:generate`
 - **Run migrations:** `npm run db:migrate`
 - **Push schema directly (dev only):** `npm run db:push`
+- **Introspect existing DB into schema:** `npm run db:pull`
 - **Drizzle Studio (DB GUI):** `npm run db:studio`
 
 ## 🧱 Repository Architecture
