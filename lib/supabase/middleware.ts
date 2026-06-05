@@ -44,8 +44,7 @@ export async function updateSession(request: NextRequest) {
 
   // IMPORTANT: If you remove getClaims() and you use server-side rendering
   // with the Supabase client, your users may be randomly logged out.
-  const { data } = await supabase.auth.getClaims();
-  const user = data?.claims;
+  await supabase.auth.getClaims();
 
   // Auth redirect is intentionally disabled — all routes are public until
   // specific pages are identified as requiring authentication.
