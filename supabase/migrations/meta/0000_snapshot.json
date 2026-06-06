@@ -1,0 +1,269 @@
+{
+  "id": "00000000-0000-0000-0000-000000000000",
+  "prevId": "",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.countries": {
+      "name": "countries",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "bigint",
+          "primaryKey": true,
+          "notNull": true,
+          "identity": {
+            "type": "byDefault",
+            "name": "countries_id_seq",
+            "increment": "1",
+            "minValue": "1",
+            "maxValue": "9223372036854775807",
+            "startWith": "1",
+            "cache": "1",
+            "cycle": false,
+            "schema": "public"
+          }
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "country": {
+          "name": "country",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "alpha3": {
+          "name": "alpha3",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "countries_country_key": {
+          "columns": [
+            "country"
+          ],
+          "nullsNotDistinct": false,
+          "name": "countries_country_key"
+        }
+      },
+      "checkConstraints": {},
+      "policies": {},
+      "isRLSEnabled": true
+    },
+    "public.draft": {
+      "name": "draft",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "bigint",
+          "primaryKey": true,
+          "notNull": true,
+          "identity": {
+            "type": "byDefault",
+            "name": "draft_id_seq",
+            "increment": "1",
+            "minValue": "1",
+            "maxValue": "9223372036854775807",
+            "startWith": "1",
+            "cache": "1",
+            "cycle": false,
+            "schema": "public"
+          }
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "draft_year": {
+          "name": "draft_year",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "draft_round": {
+          "name": "draft_round",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "draft_round_pick": {
+          "name": "draft_round_pick",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "draft_overall": {
+          "name": "draft_overall",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "original_team": {
+          "name": "original_team",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "final_team": {
+          "name": "final_team",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "draft_original_team_fkey": {
+          "name": "draft_original_team_fkey",
+          "tableFrom": "draft",
+          "tableTo": "teams",
+          "schemaTo": "public",
+          "columnsFrom": [
+            "original_team"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {},
+      "policies": {},
+      "isRLSEnabled": true
+    },
+    "public.teams": {
+      "name": "teams",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "bigint",
+          "primaryKey": true,
+          "notNull": true,
+          "identity": {
+            "type": "byDefault",
+            "name": "teams_id_seq",
+            "increment": "1",
+            "minValue": "1",
+            "maxValue": "9223372036854775807",
+            "startWith": "1",
+            "cache": "1",
+            "cycle": false,
+            "schema": "public"
+          }
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "team_name": {
+          "name": "team_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "team_city": {
+          "name": "team_city",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "team_state": {
+          "name": "team_state",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "team_country": {
+          "name": "team_country",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "start_date": {
+          "name": "start_date",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "first_season": {
+          "name": "first_season",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "last_season": {
+          "name": "last_season",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "teams_team_country_fkey": {
+          "name": "teams_team_country_fkey",
+          "tableFrom": "teams",
+          "tableTo": "countries",
+          "schemaTo": "public",
+          "columnsFrom": [
+            "team_country"
+          ],
+          "columnsTo": [
+            "country"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "teams_team_name_key": {
+          "columns": [
+            "team_name"
+          ],
+          "nullsNotDistinct": false,
+          "name": "teams_team_name_key"
+        }
+      },
+      "checkConstraints": {},
+      "policies": {},
+      "isRLSEnabled": true
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  },
+  "internal": {
+    "tables": {}
+  }
+}
